@@ -1,0 +1,2304 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>おかえり、松浦。｜ 寳家 夏の二夜 2026</title>
+<meta name="description" content="おかえり、松浦。長崎県松浦市・築100年の元旅館「寳家」が、2026年の夏に二夜ひらきます。7月は縁日、8月はお盆まつり。みんな大家族化計画。" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700;900&family=Zen+Kaku+Gothic+Antique:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  /* ====================================================================
+     寳家 夏の二夜 2026  ／  STYLE TOKENS
+     ==================================================================== */
+  :root {
+    /* base */
+    --sumi:        #0d0a04;   /* 深い墨 / night */
+    --sumi-2:      #16110a;
+    --sumi-3:      #221a10;
+    --sumi-4:      #3a2d1f;
+
+    /* secondary */
+    --kon:         #12203a;   /* 深紺 / deep navy */
+    --kon-2:       #1a2e4d;
+    --kon-3:       #2a4470;
+
+    /* accents */
+    --chochin:     #e8864a;   /* 提灯橙 */
+    --chochin-2:   #ff9e5e;
+    --chochin-d:   #c66a32;
+    --gold:        #c9963a;   /* 金 */
+    --gold-2:      #e0b35a;
+
+    /* washi */
+    --washi:       #f1ead9;
+    --washi-2:     #e2d6b6;
+    --washi-3:     #b8a988;
+    --washi-d:     #8a7c5e;
+
+    /* misc */
+    --line:        rgba(241,234,217,.14);
+    --line-strong: rgba(241,234,217,.28);
+
+    --serif: "Shippori Mincho B1", "Hiragino Mincho ProN", "YuMincho", "Yu Mincho", serif;
+    --sans:  "Noto Sans JP", "Hiragino Sans", system-ui, sans-serif;
+    --mono:  "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--sumi);
+    color: var(--washi);
+    font-family: var(--sans);
+    font-feature-settings: "palt" 1;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.8;
+    overflow-x: hidden;
+    font-weight: 400;
+  }
+
+  /* paper / night grain overlay */
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 30;
+    background:
+      radial-gradient(1400px 900px at 80% -10%, rgba(232,134,74,.06), transparent 60%),
+      radial-gradient(1200px 800px at -10% 60%, rgba(31,58,82,.18), transparent 60%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.6' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.95  0 0 0 0 0.92  0 0 0 0 0.85  0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    mix-blend-mode: screen;
+    opacity: .55;
+  }
+
+  /* utility */
+  .serif { font-family: var(--serif); }
+  .mono  { font-family: var(--mono); }
+  .tate  { writing-mode: vertical-rl; text-orientation: mixed; font-feature-settings: "palt" 0; }
+  a { color: inherit; }
+  img { display: block; max-width: 100%; }
+  ::selection { background: var(--chochin); color: var(--sumi); }
+
+  /* scroll fade primitive */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s ease, transform .9s cubic-bezier(.2,.7,.2,1); }
+  .reveal.is-in { opacity: 1; transform: none; }
+  .reveal-stagger > * { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
+  .reveal-stagger.is-in > * { opacity: 1; transform: none; }
+  .reveal-stagger.is-in > *:nth-child(1) { transition-delay: .05s; }
+  .reveal-stagger.is-in > *:nth-child(2) { transition-delay: .14s; }
+  .reveal-stagger.is-in > *:nth-child(3) { transition-delay: .23s; }
+  .reveal-stagger.is-in > *:nth-child(4) { transition-delay: .32s; }
+  .reveal-stagger.is-in > *:nth-child(5) { transition-delay: .41s; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal-stagger > * { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* ====================================================================
+     NAV
+     ==================================================================== */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px clamp(20px, 4vw, 56px);
+    background: linear-gradient(180deg, rgba(13,10,4,.88), rgba(13,10,4,0));
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .brand {
+    display: flex; align-items: baseline; gap: 10px;
+    font-family: var(--serif); font-weight: 700;
+    font-size: 22px; letter-spacing: .04em;
+    text-decoration: none; color: var(--washi);
+  }
+  .brand .yes {
+    background: var(--chochin);
+    color: var(--sumi);
+    padding: 2px 9px 4px;
+    font-family: var(--serif); font-style: italic; font-weight: 800;
+    font-size: 15px; letter-spacing: .04em;
+    transform: translateY(-2px);
+    display: inline-block;
+  }
+  .brand .tag {
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: .25em;
+    color: var(--washi-3);
+    margin-left: 6px;
+  }
+  .nav-links {
+    display: flex; gap: 26px;
+    font-size: 12px; letter-spacing: .18em;
+    font-family: var(--mono);
+  }
+  .nav-links a {
+    text-decoration: none; color: var(--washi-2);
+    padding: 6px 0; position: relative;
+  }
+  .nav-links a::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+    height: 1px; background: var(--chochin);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .35s ease;
+  }
+  .nav-links a:hover { color: var(--washi); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-cta {
+    font-family: var(--sans);
+    font-size: 12px; letter-spacing: .14em; font-weight: 500;
+    border: 1px solid var(--chochin);
+    color: var(--chochin);
+    padding: 9px 18px;
+    background: transparent;
+    text-decoration: none;
+    transition: all .25s;
+  }
+  .nav-cta:hover { background: var(--chochin); color: var(--sumi); }
+  @media (max-width: 820px) { .nav-links { display: none; } }
+
+  /* ====================================================================
+     HERO
+     ==================================================================== */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    padding: clamp(96px, 14vh, 140px) clamp(20px, 4vw, 56px) clamp(40px, 6vh, 80px);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  /* hanabi canvas */
+  #hanabi {
+    position: absolute; inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  /* nightsky vignette under canvas */
+  .hero::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(80% 60% at 50% 0%, rgba(31,58,82,.55), transparent 70%),
+      radial-gradient(60% 70% at 50% 100%, rgba(232,134,74,.10), transparent 70%),
+      linear-gradient(180deg, #050402 0%, #0d0a04 65%, #1a1206 100%);
+    z-index: -1;
+  }
+  /* horizontal moonline */
+  .hero::after {
+    content: ""; position: absolute;
+    left: 8%; right: 8%; top: 28%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(232,134,74,.4), transparent);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1440px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(32px, 5vw, 56px);
+  }
+
+  .hero-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    font-family: var(--mono);
+    font-size: 11px; letter-spacing: .25em;
+    color: var(--washi-3);
+    flex-wrap: wrap; gap: 16px;
+  }
+  .hero-top .right { display: flex; gap: 24px; }
+  .hero-top b { color: var(--chochin); font-weight: 500; margin-right: 6px; }
+
+  .hero-title-block {
+    position: relative;
+    padding-top: clamp(20px, 4vh, 40px);
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 14px;
+    font-family: var(--mono);
+    font-size: 11px; letter-spacing: .35em;
+    color: var(--chochin);
+    margin-bottom: 28px;
+    text-transform: uppercase;
+  }
+  .hero-eyebrow::before {
+    content: ""; width: 36px; height: 1px; background: var(--chochin);
+  }
+  .hero-eyebrow::after {
+    content: ""; width: 36px; height: 1px; background: var(--chochin);
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(54px, 11vw, 178px);
+    line-height: .98;
+    letter-spacing: -.015em;
+    margin: 0;
+    color: var(--washi);
+    text-wrap: balance;
+  }
+  .hero-title .l1 { display: block; }
+  .hero-title .l2 { display: block; color: var(--chochin); }
+  .hero-title .dot {
+    display: inline-block;
+    width: .15em; height: .15em; border-radius: 50%;
+    background: var(--chochin);
+    vertical-align: super;
+    margin-left: .02em;
+    box-shadow: 0 0 24px rgba(232,134,74,.6);
+  }
+
+  .hero-subcopy {
+    margin-top: clamp(20px, 3vh, 28px);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(15px, 1.5vw, 22px);
+    color: var(--chochin);
+    letter-spacing: .05em;
+  }
+  .hero-lead {
+    margin-top: clamp(28px, 5vh, 44px);
+    max-width: 560px;
+    font-family: var(--serif);
+    font-size: clamp(15px, 1.4vw, 19px);
+    line-height: 2.0;
+    color: var(--washi-2);
+  }
+  .hero-lead .em {
+    color: var(--chochin-2);
+    border-bottom: 1px dashed rgba(232,134,74,.5);
+    padding-bottom: 1px;
+  }
+
+  /* dual badge — 7月／8月 */
+  .badge-row {
+    margin-top: clamp(40px, 6vh, 64px);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(14px, 2vw, 28px);
+    max-width: 900px;
+  }
+  .badge {
+    position: relative;
+    border: 1px solid var(--line-strong);
+    background: linear-gradient(180deg, rgba(241,234,217,.04), rgba(241,234,217,0));
+    backdrop-filter: blur(2px);
+    padding: 22px 22px 24px;
+    overflow: hidden;
+    transition: border-color .3s ease, transform .3s ease;
+  }
+  .badge:hover {
+    border-color: var(--chochin);
+    transform: translateY(-2px);
+  }
+  .badge::before {
+    content: ""; position: absolute; top: 0; left: 0;
+    width: 32px; height: 32px;
+    border-top: 1px solid var(--chochin);
+    border-left: 1px solid var(--chochin);
+  }
+  .badge::after {
+    content: ""; position: absolute; bottom: 0; right: 0;
+    width: 32px; height: 32px;
+    border-bottom: 1px solid var(--chochin);
+    border-right: 1px solid var(--chochin);
+  }
+  .badge .step {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .3em;
+    color: var(--chochin);
+  }
+  .badge .month {
+    margin-top: 8px;
+    font-family: var(--serif);
+    font-size: 44px;
+    line-height: 1;
+    letter-spacing: -.02em;
+    color: var(--washi);
+  }
+  .badge .month small {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--washi-3);
+    letter-spacing: .05em;
+    margin-left: 4px;
+  }
+  .badge .name {
+    margin-top: 12px;
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--washi-2);
+    letter-spacing: .04em;
+  }
+  .badge .meta {
+    margin-top: 14px;
+    font-size: 11px;
+    color: var(--washi-3);
+    letter-spacing: .12em;
+  }
+
+  /* tiny details — bottom corner stamp + scroll cue */
+  .hero-stamp {
+    position: absolute;
+    right: clamp(20px, 4vw, 56px);
+    bottom: clamp(40px, 6vh, 80px);
+    width: 116px; height: 116px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #ff9e5e, #c66a32 70%);
+    color: var(--sumi);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif);
+    font-size: 13px;
+    line-height: 1.4;
+    text-align: center;
+    letter-spacing: .08em;
+    transform: rotate(-7deg);
+    box-shadow: 0 12px 36px rgba(232,134,74,.35), inset 0 1px 0 rgba(255,255,255,.4);
+    animation: pulseStamp 4.5s ease-in-out infinite;
+  }
+  .hero-stamp b {
+    display: block;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+  @keyframes pulseStamp {
+    0%, 100% { box-shadow: 0 12px 36px rgba(232,134,74,.35), inset 0 1px 0 rgba(255,255,255,.4); }
+    50%      { box-shadow: 0 14px 48px rgba(232,134,74,.55), inset 0 1px 0 rgba(255,255,255,.4); }
+  }
+  @media (max-width: 720px) {
+    .hero-stamp { width: 86px; height: 86px; font-size: 11px; right: 18px; bottom: 18px; }
+    .hero-stamp b { font-size: 16px; }
+  }
+
+  .scroll-cue {
+    position: absolute;
+    left: clamp(20px, 4vw, 56px);
+    bottom: clamp(28px, 4vh, 48px);
+    display: flex; align-items: center; gap: 14px;
+    font-family: var(--mono);
+    font-size: 10px; letter-spacing: .35em;
+    color: var(--washi-3);
+    z-index: 2;
+  }
+  .scroll-cue::after {
+    content: ""; width: 60px; height: 1px;
+    background: var(--washi-3);
+    animation: scrollLine 2.4s ease-in-out infinite;
+    transform-origin: left;
+  }
+  @keyframes scrollLine {
+    0%,100% { transform: scaleX(.05); opacity: .3; }
+    50%     { transform: scaleX(1);   opacity: 1; }
+  }
+
+  /* ====================================================================
+     SECTION COMMONS
+     ==================================================================== */
+  section { position: relative; z-index: 2; }
+  .container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 56px);
+  }
+  .section-head {
+    display: flex; align-items: baseline; gap: 18px;
+    font-family: var(--mono);
+    font-size: 11px; letter-spacing: .25em;
+    color: var(--washi-3);
+    margin-bottom: 24px;
+  }
+  .section-head .num { color: var(--chochin); font-weight: 500; }
+  .section-head::after {
+    content: ""; flex: 1; height: 1px; background: var(--line-strong);
+    margin-left: 8px;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(34px, 5vw, 72px);
+    line-height: 1.12;
+    letter-spacing: -.005em;
+    margin: 0 0 16px;
+    text-wrap: balance;
+  }
+  .section-title .accent { color: var(--chochin); }
+  .section-subtitle {
+    font-family: var(--mono);
+    font-size: 11px; letter-spacing: .3em;
+    color: var(--washi-3);
+    text-transform: uppercase;
+    margin-bottom: clamp(36px, 5vw, 56px);
+  }
+
+  /* ====================================================================
+     WHY — 課題提起
+     ==================================================================== */
+  .why {
+    padding: clamp(80px, 12vw, 160px) 0;
+    position: relative;
+  }
+  .why-lead {
+    font-family: var(--serif);
+    font-size: clamp(22px, 2.4vw, 32px);
+    line-height: 1.7;
+    color: var(--washi);
+    max-width: 920px;
+    margin: 0 0 clamp(56px, 8vw, 88px);
+    text-wrap: balance;
+  }
+  .why-lead .q {
+    color: var(--washi-3);
+    font-size: 0.7em;
+    letter-spacing: .15em;
+    display: block;
+    margin-bottom: 18px;
+    font-family: var(--mono);
+  }
+  .why-lead .em {
+    color: var(--chochin);
+    border-bottom: 1px solid var(--chochin);
+    padding-bottom: 2px;
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+  .why-card {
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 36px 32px 40px;
+    position: relative;
+    transition: background .3s ease;
+    min-height: 320px;
+    display: flex; flex-direction: column;
+  }
+  .why-card:hover { background: rgba(232,134,74,.03); }
+  .why-card .icon {
+    width: 40px; height: 40px;
+    margin-bottom: 26px;
+    color: var(--chochin);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .why-card .icon svg { width: 100%; height: 100%; }
+  .why-card .label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .3em;
+    color: var(--chochin);
+    margin-bottom: 12px;
+  }
+  .why-card h3 {
+    font-family: var(--serif);
+    font-size: clamp(20px, 1.8vw, 26px);
+    font-weight: 500;
+    line-height: 1.5;
+    margin: 0 0 16px;
+    color: var(--washi);
+  }
+  .why-card p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.95;
+    color: var(--washi-3);
+  }
+  .why-card .answer {
+    margin-top: auto;
+    padding-top: 24px;
+    border-top: 1px dashed rgba(241,234,217,.18);
+    font-family: var(--serif);
+    font-size: 15px;
+    color: var(--chochin-2);
+    letter-spacing: .03em;
+  }
+  .why-card .answer::before {
+    content: "→ ";
+    color: var(--chochin);
+    margin-right: 4px;
+  }
+  @media (max-width: 920px) {
+    .why-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ====================================================================
+     EVENT SECTIONS  (7月 / 8月)
+     ==================================================================== */
+  .event {
+    padding: clamp(80px, 12vw, 160px) 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .event--july {
+    background: linear-gradient(180deg, var(--sumi) 0%, #100b06 50%, var(--sumi) 100%);
+  }
+  .event--august {
+    background: var(--kon);
+  }
+  .event--august::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(900px 600px at 20% 20%, rgba(232,134,74,.10), transparent 60%),
+      radial-gradient(700px 500px at 90% 80%, rgba(201,150,58,.10), transparent 60%);
+    pointer-events: none;
+  }
+
+  /* header layout w/ vertical text */
+  .event-head {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: clamp(20px, 3vw, 48px);
+    align-items: end;
+    margin-bottom: clamp(48px, 6vw, 80px);
+  }
+  .event-step {
+    font-family: var(--serif);
+    font-size: clamp(80px, 10vw, 160px);
+    line-height: .85;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--chochin);
+    letter-spacing: -.04em;
+    user-select: none;
+  }
+  .event-step .num {
+    color: var(--chochin);
+    -webkit-text-stroke: 0;
+  }
+  .event-titles {
+    text-align: left;
+  }
+  .event-month {
+    font-family: var(--mono);
+    font-size: 11px; letter-spacing: .35em;
+    color: var(--chochin);
+    margin-bottom: 18px;
+  }
+  .event-title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(32px, 4.5vw, 64px);
+    line-height: 1.15;
+    margin: 0 0 14px;
+    letter-spacing: -.005em;
+    color: var(--washi);
+    text-wrap: balance;
+  }
+  .event-subtitle {
+    font-family: var(--serif);
+    font-size: clamp(15px, 1.4vw, 19px);
+    color: var(--washi-2);
+    line-height: 1.7;
+    max-width: 580px;
+  }
+  .event-tate {
+    font-family: var(--serif);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 13px;
+    letter-spacing: .4em;
+    color: var(--washi-3);
+    height: 240px;
+    padding-top: 8px;
+    font-feature-settings: "palt" 0;
+  }
+  @media (max-width: 820px) {
+    .event-head { grid-template-columns: 1fr; gap: 16px; }
+    .event-step { font-size: 80px; }
+    .event-tate { display: none; }
+  }
+
+  /* event facts — stat row */
+  .event-facts {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+    margin-bottom: clamp(48px, 5vw, 72px);
+    border-top: 1px solid var(--line-strong);
+    border-bottom: 1px solid var(--line-strong);
+  }
+  .fact {
+    padding: 22px 18px 22px 0;
+    border-right: 1px solid var(--line);
+  }
+  .fact:last-child { border-right: none; }
+  .fact:not(:first-child) { padding-left: 20px; }
+  .fact .label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .25em;
+    color: var(--washi-3);
+    margin-bottom: 8px;
+  }
+  .fact .val {
+    font-family: var(--serif);
+    font-size: clamp(20px, 2vw, 28px);
+    line-height: 1.2;
+    color: var(--washi);
+    letter-spacing: -.01em;
+  }
+  .fact .val small {
+    font-size: .6em;
+    color: var(--washi-3);
+    margin-left: 4px;
+    letter-spacing: 0;
+  }
+  .fact .val .em {
+    color: var(--chochin);
+  }
+  @media (max-width: 720px) {
+    .event-facts { grid-template-columns: repeat(2, 1fr); }
+    .fact:nth-child(2) { border-right: none; }
+    .fact:nth-child(1), .fact:nth-child(2) { border-bottom: 1px solid var(--line); }
+    .fact:nth-child(3) { padding-left: 0; }
+  }
+
+  /* event content cards */
+  .event-cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px;
+    background: var(--line-strong);
+    border: 1px solid var(--line-strong);
+  }
+  .event--august .event-cards {
+    background: rgba(241,234,217,.18);
+    border-color: rgba(241,234,217,.18);
+  }
+  .ev-card {
+    background: var(--sumi);
+    padding: 32px 26px 30px;
+    min-height: 380px;
+    display: flex; flex-direction: column;
+    position: relative;
+    transition: background .3s ease;
+  }
+  .event--august .ev-card {
+    background: var(--kon);
+  }
+  .ev-card:hover { background: var(--sumi-2); }
+  .event--august .ev-card:hover { background: var(--kon-2); }
+  .ev-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .3em;
+    color: var(--chochin);
+    margin-bottom: 24px;
+  }
+  .ev-glyph {
+    font-family: var(--serif);
+    font-size: 64px;
+    line-height: 1;
+    color: var(--washi);
+    margin-bottom: 22px;
+    letter-spacing: -.02em;
+  }
+  .ev-glyph .sub {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .3em;
+    color: var(--washi-d);
+    margin-top: 8px;
+  }
+  .ev-title {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 0 12px;
+    line-height: 1.4;
+    color: var(--washi);
+  }
+  .ev-desc {
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--washi-3);
+    margin: 0;
+  }
+  .ev-tags {
+    margin-top: auto;
+    padding-top: 22px;
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .ev-tags span {
+    font-size: 10px;
+    letter-spacing: .12em;
+    padding: 4px 9px;
+    border: 1px solid rgba(241,234,217,.2);
+    color: var(--washi-3);
+  }
+  .event--august .ev-tags span {
+    border-color: rgba(241,234,217,.25);
+  }
+  @media (max-width: 1100px) {
+    .event-cards { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 540px) {
+    .event-cards { grid-template-columns: 1fr; }
+    .ev-card { min-height: 0; }
+  }
+
+  /* flow note under cards */
+  .event-flow {
+    margin-top: clamp(40px, 5vw, 64px);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: clamp(24px, 4vw, 48px);
+    align-items: start;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+  .event-flow .heading {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .3em;
+    color: var(--chochin);
+    white-space: nowrap;
+  }
+  .event-flow .text {
+    font-family: var(--serif);
+    font-size: clamp(15px, 1.4vw, 19px);
+    line-height: 1.9;
+    color: var(--washi-2);
+  }
+  .event-flow .text b { color: var(--chochin); font-weight: 600; }
+  @media (max-width: 720px) {
+    .event-flow { grid-template-columns: 1fr; gap: 12px; }
+  }
+
+  /* augmented features panel for august only */
+  .aug-extra {
+    margin-top: clamp(40px, 5vw, 64px);
+    padding: 28px 28px 28px;
+    background: rgba(13,10,4,.4);
+    border: 1px solid rgba(232,134,74,.3);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 28px;
+    align-items: center;
+  }
+  .aug-extra .icon {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: var(--chochin);
+    color: var(--sumi);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 700;
+  }
+  .aug-extra .body { font-size: 14px; color: var(--washi-2); line-height: 1.8; }
+  .aug-extra .body b { color: var(--washi); }
+  .aug-extra .note { font-family: var(--mono); font-size: 10px; color: var(--washi-d); letter-spacing: .25em; }
+  @media (max-width: 720px) {
+    .aug-extra { grid-template-columns: auto 1fr; }
+    .aug-extra .note { grid-column: 1 / -1; }
+  }
+
+  /* ====================================================================
+     HOW — 3step
+     ==================================================================== */
+  .how {
+    padding: clamp(80px, 12vw, 160px) 0;
+    position: relative;
+    background: var(--sumi);
+  }
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(20px, 2vw, 32px);
+    position: relative;
+  }
+  .how-grid::before {
+    content: ""; position: absolute;
+    left: 8%; right: 8%; top: 90px;
+    height: 1px;
+    background: repeating-linear-gradient(90deg, var(--chochin) 0 8px, transparent 8px 16px);
+    opacity: .4;
+    z-index: 0;
+  }
+  @media (max-width: 820px) {
+    .how-grid::before { display: none; }
+    .how-grid { grid-template-columns: 1fr; }
+  }
+  .step-card {
+    position: relative;
+    padding: 36px 28px 32px;
+    background: var(--sumi-2);
+    border: 1px solid var(--line);
+    transition: border-color .3s, transform .3s;
+  }
+  .step-card:hover { border-color: var(--chochin); transform: translateY(-4px); }
+  .step-card .step-num {
+    position: relative;
+    z-index: 1;
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: var(--sumi-2);
+    border: 1.5px solid var(--chochin);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif);
+    font-size: 28px;
+    color: var(--chochin);
+    margin: 0 auto 28px;
+  }
+  .step-card h3 {
+    font-family: var(--serif);
+    font-size: clamp(22px, 2.2vw, 30px);
+    font-weight: 500;
+    line-height: 1.5;
+    margin: 0 0 14px;
+    text-align: center;
+    color: var(--washi);
+  }
+  .step-card p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--washi-3);
+    text-align: center;
+  }
+  .step-card .arrow {
+    text-align: center;
+    margin-top: 22px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .2em;
+    color: var(--chochin);
+  }
+
+  /* ====================================================================
+     WHO — 来てほしい人
+     ==================================================================== */
+  .who {
+    padding: clamp(80px, 12vw, 160px) 0;
+    background: linear-gradient(180deg, var(--sumi) 0%, #0a0703 100%);
+    position: relative;
+  }
+  .who-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: start;
+  }
+  @media (max-width: 920px) {
+    .who-grid { grid-template-columns: 1fr; }
+  }
+  .who-list {
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  .who-list li {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 24px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: baseline;
+  }
+  .who-list .tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .25em;
+    color: var(--chochin);
+    padding-top: 6px;
+  }
+  .who-list .body {
+    font-family: var(--serif);
+    font-size: clamp(17px, 1.6vw, 21px);
+    line-height: 1.7;
+    color: var(--washi);
+  }
+  .who-list .body small {
+    display: block;
+    margin-top: 4px;
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--washi-3);
+    line-height: 1.7;
+  }
+
+  .who-quote {
+    position: relative;
+    padding: 36px 32px 36px;
+    background: var(--sumi-2);
+    border-left: 3px solid var(--chochin);
+  }
+  .who-quote::before {
+    content: "「";
+    position: absolute; top: -14px; left: 20px;
+    font-family: var(--serif);
+    font-size: 80px;
+    line-height: 1;
+    color: var(--chochin);
+    opacity: .25;
+  }
+  .who-quote .text {
+    font-family: var(--serif);
+    font-size: clamp(18px, 1.8vw, 22px);
+    line-height: 2.0;
+    color: var(--washi);
+    margin: 0 0 18px;
+    text-wrap: balance;
+  }
+  .who-quote .attr {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .3em;
+    color: var(--chochin);
+  }
+
+  /* ====================================================================
+     NEXT — これから（寳家 × みんなの学校）
+     ==================================================================== */
+  .next {
+    padding: clamp(80px, 12vw, 160px) 0;
+    background: linear-gradient(180deg, #0a0703 0%, var(--sumi) 50%, #0a0703 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .next-lead {
+    font-family: var(--serif);
+    font-size: clamp(18px, 1.8vw, 24px);
+    line-height: 1.95;
+    color: var(--washi-2);
+    max-width: 880px;
+    margin: 0 0 clamp(48px, 6vw, 72px);
+  }
+  .next-lead b {
+    color: var(--chochin); font-weight: 500;
+    background: linear-gradient(transparent 60%, rgba(232,134,74,.18) 60%);
+  }
+  .next-two {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: clamp(20px, 3vw, 48px);
+    align-items: stretch;
+    margin-bottom: clamp(48px, 6vw, 72px);
+  }
+  @media (max-width: 820px) {
+    .next-two { grid-template-columns: 1fr; }
+  }
+  .next-card {
+    padding: 44px 36px 40px;
+    background: var(--sumi-2);
+    border: 1px solid var(--line);
+    position: relative;
+    transition: border-color .3s ease;
+    display: flex; flex-direction: column;
+  }
+  .next-card:hover { border-color: var(--chochin); }
+  .next-card::before {
+    content: ""; position: absolute; top: 0; left: 0;
+    width: 32px; height: 32px;
+    border-top: 1px solid var(--chochin);
+    border-left: 1px solid var(--chochin);
+  }
+  .next-card .label {
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: .3em; color: var(--chochin);
+    margin-bottom: 16px;
+  }
+  .next-card .glyph {
+    font-family: var(--serif); font-size: 96px;
+    line-height: 1; color: var(--washi);
+    letter-spacing: -.04em; margin-bottom: 24px;
+  }
+  .next-card h3 {
+    font-family: var(--serif);
+    font-size: clamp(22px, 2vw, 28px);
+    font-weight: 500; line-height: 1.4;
+    margin: 0 0 14px; color: var(--washi);
+  }
+  .next-card p {
+    margin: 0; font-size: 14px; line-height: 1.9; color: var(--washi-3);
+  }
+  .next-card .tag {
+    margin-top: auto; padding-top: 22px;
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: .2em; color: var(--washi-d);
+  }
+  .next-card .tag b { color: var(--chochin); font-weight: 500; }
+  .next-amp {
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-size: 48px;
+    color: var(--chochin); line-height: 1;
+  }
+  @media (max-width: 820px) {
+    .next-amp { display: none; }
+  }
+  .next-bottom {
+    font-family: var(--serif);
+    font-size: clamp(17px, 1.6vw, 21px);
+    line-height: 1.9; color: var(--washi);
+    max-width: 880px; margin: 0;
+    padding: 28px 32px;
+    border-left: 3px solid var(--chochin);
+    background: rgba(232,134,74,.04);
+  }
+  .next-bottom .em { color: var(--chochin); }
+  .next-three {
+    margin-top: clamp(40px, 5vw, 64px);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line);
+  }
+  @media (max-width: 720px) {
+    .next-three { grid-template-columns: 1fr; }
+  }
+  .gen {
+    padding: 24px 20px 24px 0;
+    border-right: 1px solid var(--line);
+  }
+  .gen:last-child { border-right: none; }
+  .gen:not(:first-child) { padding-left: 24px; }
+  .gen .age {
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: .25em; color: var(--chochin);
+    margin-bottom: 10px;
+  }
+  .gen h4 {
+    font-family: var(--serif); font-size: 18px;
+    font-weight: 500; margin: 0 0 8px; color: var(--washi);
+  }
+  .gen p {
+    margin: 0; font-size: 13px; color: var(--washi-3); line-height: 1.85;
+  }
+  @media (max-width: 720px) {
+    .gen { border-right: none; border-bottom: 1px solid var(--line); padding-left: 0; padding-right: 0; }
+    .gen:last-child { border-bottom: none; }
+  }
+
+  /* ====================================================================
+     CTA
+     ==================================================================== */
+  .cta {
+    padding: clamp(80px, 12vw, 160px) 0;
+    text-align: center;
+    background:
+      radial-gradient(800px 500px at 50% 50%, rgba(232,134,74,.18), transparent 70%),
+      linear-gradient(180deg, #0a0703 0%, var(--sumi) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .cta::before, .cta::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, var(--chochin), transparent);
+    transform: translateX(-50%);
+  }
+  .cta::before { top: 0; height: 60px; }
+  .cta::after  { bottom: 0; height: 60px; }
+
+  .cta-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px; letter-spacing: .35em;
+    color: var(--chochin);
+    margin-bottom: 28px;
+  }
+  .cta-title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(38px, 5.5vw, 88px);
+    line-height: 1.15;
+    margin: 0 0 28px;
+    color: var(--washi);
+    text-wrap: balance;
+  }
+  .cta-title .em { color: var(--chochin); }
+  .cta-sub {
+    font-family: var(--serif);
+    font-size: clamp(15px, 1.4vw, 19px);
+    line-height: 1.9;
+    color: var(--washi-2);
+    max-width: 640px;
+    margin: 0 auto 48px;
+  }
+  .cta-actions {
+    display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 17px 32px;
+    font-family: var(--sans);
+    font-size: 14px;
+    letter-spacing: .12em;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all .25s;
+    border: 1px solid transparent;
+  }
+  .btn.primary {
+    background: var(--chochin);
+    color: var(--sumi);
+    box-shadow: 0 8px 32px rgba(232,134,74,.4);
+  }
+  .btn.primary:hover {
+    background: var(--chochin-2);
+    box-shadow: 0 12px 40px rgba(232,134,74,.55);
+    transform: translateY(-2px);
+  }
+  .btn.ghost {
+    background: transparent;
+    color: var(--washi);
+    border-color: var(--washi);
+  }
+  .btn.ghost:hover {
+    background: var(--washi);
+    color: var(--sumi);
+  }
+  .btn .arrow {
+    transition: transform .25s;
+  }
+  .btn:hover .arrow { transform: translateX(4px); }
+  .btn .line-icon {
+    width: 18px; height: 18px;
+    fill: currentColor;
+  }
+
+  .cta-note {
+    margin-top: 36px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .25em;
+    color: var(--washi-d);
+  }
+  .cta-note .marker {
+    color: var(--gold);
+    margin-right: 4px;
+  }
+
+  /* ====================================================================
+     ACCESS  (small, before footer)
+     ==================================================================== */
+  .access-strip {
+    padding: clamp(60px, 8vw, 96px) 0;
+    border-top: 1px solid var(--line);
+    background: var(--sumi);
+  }
+  .access-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: start;
+  }
+  @media (max-width: 720px) {
+    .access-grid { grid-template-columns: 1fr; }
+  }
+  .access-grid dl {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 14px 24px;
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
+  }
+  .access-grid dt {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .25em;
+    color: var(--chochin);
+    padding-top: 5px;
+  }
+  .access-grid dd {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--washi-2);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 14px;
+  }
+  .access-grid dd .em {
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--washi);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .access-story {
+    padding: 28px 32px;
+    border: 1px solid var(--line);
+    background: rgba(31,58,82,.18);
+    font-family: var(--serif);
+    font-size: 15px;
+    line-height: 1.95;
+    color: var(--washi-2);
+  }
+  .access-story .label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .3em;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  /* ====================================================================
+     FOOTER
+     ==================================================================== */
+  footer {
+    background: #050402;
+    color: var(--washi-2);
+    padding: 80px clamp(20px, 4vw, 56px) 36px;
+    border-top: 1px solid var(--line);
+    position: relative;
+  }
+  .footer-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 56px;
+    padding-bottom: 56px;
+    border-bottom: 1px solid var(--line);
+  }
+  @media (max-width: 820px) {
+    .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+  }
+  .footer-brand .name {
+    font-family: var(--serif);
+    font-size: 38px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--washi);
+  }
+  .footer-brand .name .yes {
+    background: var(--chochin);
+    color: var(--sumi);
+    padding: 2px 10px 4px;
+    font-style: italic;
+    font-weight: 800;
+    font-size: 22px;
+    margin-right: 8px;
+    transform: translateY(-4px);
+    display: inline-block;
+  }
+  .footer-brand .tag {
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--chochin);
+    margin-bottom: 18px;
+  }
+  .footer-brand p {
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--washi-3);
+    margin: 0;
+    max-width: 460px;
+  }
+  .footer-col h5 {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .3em;
+    color: var(--chochin);
+    margin: 0 0 18px;
+    font-weight: 500;
+  }
+  .footer-col ul { list-style: none; padding: 0; margin: 0; }
+  .footer-col li {
+    margin-bottom: 12px;
+    font-size: 13px;
+    color: var(--washi-2);
+  }
+  .footer-col a {
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .footer-col a:hover { color: var(--chochin); }
+
+  .footer-credit {
+    max-width: 1320px;
+    margin: 28px auto 0;
+    display: flex; justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .2em;
+    color: var(--washi-d);
+  }
+  .footer-credit .trinity {
+    color: var(--gold);
+  }
+
+  /* ====================================================================
+     UTIL — 【要確認】 marker style
+     ==================================================================== */
+  .todo {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--gold);
+    background: rgba(201,150,58,.12);
+    border: 1px solid rgba(201,150,58,.4);
+    padding: 1px 7px 2px;
+    letter-spacing: .12em;
+    vertical-align: middle;
+    margin: 0 3px;
+  }
+
+</style>
+</head>
+
+<body>
+
+<!-- ===================================================================
+     NAV
+     =================================================================== -->
+<nav class="nav">
+  <a href="#top" class="brand">
+    <span class="yes">YES!</span>
+    <span>寳家</span>
+    <span class="tag">SUMMER ’26</span>
+  </a>
+  <div class="nav-links">
+    <a href="#why">WHY</a>
+    <a href="#july">7月 縁日</a>
+    <a href="#august">8月 お盆まつり</a>
+    <a href="#next">これから</a>
+    <a href="#how">参加方法</a>
+    <a href="#access">アクセス</a>
+  </div>
+  <a href="#cta" class="nav-cta">LINEで案内をうけとる</a>
+</nav>
+
+<!-- ===================================================================
+     HERO
+     =================================================================== -->
+<section class="hero" id="top">
+  <canvas id="hanabi"></canvas>
+
+  <div class="hero-inner">
+    <div class="hero-top">
+      <div>MATSUURA · NAGASAKI &nbsp;·&nbsp; SUMMER 2026</div>
+      <div class="right">
+        <div><b>EST.</b>1925</div>
+        <div><b>HERE</b>おかえり、松浦。</div>
+      </div>
+    </div>
+
+    <div class="hero-title-block">
+      <div class="hero-eyebrow">寳家 夏の二夜</div>
+      <h1 class="hero-title">
+        <span class="l1">おかえり、</span>
+        <span class="l2">松浦<span class="dot"></span></span>
+      </h1>
+      <div class="hero-subcopy">— ここに来れば、何かある。</div>
+      <p class="hero-lead">
+        お盆は、まちに人が帰ってくる季節。
+        築100年の元旅館「寳家」が、この夏 <span class="em">二夜</span> 玄関をひらきます。
+        ご近所さんの店、町の人の声、子どもの工作、花火、足湯。
+        ぜんぶ持ち寄って、おなじ屋根の下で一晩を過ごしましょう。
+      </p>
+    </div>
+
+    <div class="badge-row reveal-stagger">
+      <div class="badge">
+        <div class="step">STEP 1 ／ JUL.</div>
+        <div class="month">7月<small>夕方〜夜</small></div>
+        <div class="name">寳家の縁日 〜まちに家族を増やそう〜</div>
+        <div class="meta">50〜80人 ／ ふらっと OK ／ 手ぶら OK</div>
+      </div>
+      <div class="badge">
+        <div class="step">STEP 2 ／ AUG.</div>
+        <div class="month">8月<small>松浦花火大会 当日</small></div>
+        <div class="name">寳家お盆まつり 〜まちの家族、集まれ〜</div>
+        <div class="meta">100人以上 ／ 子連れ歓迎 ／ 花火配信</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-stamp">
+    <div>
+      <span style="font-size:9px;letter-spacing:.2em;display:block;margin-bottom:2px;">SUMMER</span>
+      <b>二夜</b>
+      <span style="font-size:10px;letter-spacing:.15em;display:block;margin-top:2px;">寳家・2026</span>
+    </div>
+  </div>
+
+  <div class="scroll-cue">SCROLL</div>
+</section>
+
+<!-- ===================================================================
+     WHY — 課題提起
+     =================================================================== -->
+<section class="why" id="why">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="num">01</span><span>WHY — この夏、どこで過ごす？</span>
+    </div>
+
+    <h2 class="section-title reveal">
+      帰省しても、子連れでも、<br />
+      <span class="accent">いつもの夏</span>で終わりそうな夜に。
+    </h2>
+    <div class="section-subtitle reveal">A SUMMER NIGHT THAT'S NOT QUITE YOURS YET</div>
+
+    <p class="why-lead reveal">
+      <span class="q">問い：</span>
+      松浦で生まれて、松浦で育って、それでも夏になると<br />
+      「<span class="em">今年も結局、家で過ごすだけ</span>」になっていませんか。
+    </p>
+
+    <div class="why-grid reveal-stagger">
+      <div class="why-card">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 32 V18 L20 7 L34 18 V32 Z" />
+            <path d="M16 32 V22 H24 V32" />
+            <path d="M10 13 V8 H14 V11" />
+          </svg>
+        </div>
+        <div class="label">CASE 01 ／ 帰省</div>
+        <h3>帰ってきても、<br/>「どこ行こう」の夜のままで。</h3>
+        <p>
+          実家でテレビを観るだけの夜。久しぶりに会いたい人がいるのに、
+          集まる場所が思い当たらない。「おかえり」のすぐそばに、もう一軒。
+        </p>
+        <div class="answer">寳家を、まちの玄関に。</div>
+      </div>
+
+      <div class="why-card">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="14" cy="14" r="4" />
+            <circle cx="26" cy="14" r="3" />
+            <path d="M6 32 C 6 24 22 24 22 32" />
+            <path d="M22 30 C 22 26 34 26 34 32" />
+          </svg>
+        </div>
+        <div class="label">CASE 02 ／ 子連れ</div>
+        <h3>子どもが勉強したり、<br/>遊んだりできる場所が、近くにない。</h3>
+        <p>
+          夏休みの宿題、雨の日のひまつぶし、放課後のちょっとした時間。
+          子どもの「居場所」って、意外と近くにない。
+          寳家には工作・ゲーム・放送局体験、いつ来ても何かあります。
+        </p>
+        <div class="answer">屋根の下に、子どもの居場所を。</div>
+      </div>
+
+      <div class="why-card">
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 26 C 8 18 32 18 32 26 V32 H8 Z" />
+            <path d="M14 18 V12" />
+            <path d="M20 18 V10" />
+            <path d="M26 18 V12" />
+          </svg>
+        </div>
+        <div class="label">CASE 03 ／ 食</div>
+        <h3>近所のうまい店、<br/>もっと知りたかった。</h3>
+        <p>
+          「あの店、行ってみたかったんよね」を、ぜんぶ寳家に集めます。
+          ご近所のデリバリー連合で、松浦の味が一晩で一周できる夜に。
+        </p>
+        <div class="answer">町のごはんを、一つ屋根の下で。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     EVENT — 7月 縁日
+     =================================================================== -->
+<section class="event event--july" id="july">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="num">02 ／ STEP 1</span><span>JULY ／ 縁日</span>
+    </div>
+
+    <div class="event-head reveal">
+      <div class="event-step"><span class="num">01</span>.</div>
+      <div class="event-titles">
+        <div class="event-month">7月 ／ プレイベント</div>
+        <h2 class="event-title">
+          寳家の縁日<br/>
+          <span style="color:var(--washi-3); font-size:.6em; letter-spacing:.05em;">〜まちに家族を増やそう〜</span>
+        </h2>
+        <p class="event-subtitle">
+          最初に、ちいさく集まる夜。常連さん、近所の人、久しぶりに会いたい人を、
+          ふらっと一晩、寳家へ。
+        </p>
+      </div>
+      <div class="event-tate">夏のはじめに、玄関をひらく</div>
+    </div>
+
+    <div class="event-facts reveal-stagger">
+      <div class="fact">
+        <div class="label">DATE</div>
+        <div class="val">7月某日<small><span class="todo">要確認</span></small></div>
+      </div>
+      <div class="fact">
+        <div class="label">TIME</div>
+        <div class="val">夕方〜夜</div>
+      </div>
+      <div class="fact">
+        <div class="label">TARGET</div>
+        <div class="val"><span class="em">50</span>〜<span class="em">80</span>人</div>
+      </div>
+      <div class="fact">
+        <div class="label">PARTICIPATION</div>
+        <div class="val">ふらっと OK</div>
+      </div>
+    </div>
+
+    <div class="event-cards reveal-stagger">
+      <div class="ev-card">
+        <div class="ev-num">01 ／ FOOD</div>
+        <div class="ev-glyph">食<span class="sub">DELIVERY</span></div>
+        <h3 class="ev-title">ご近所デリバリー縁日</h3>
+        <p class="ev-desc">
+          近隣のお店が寳家に集合。松浦の味を一晩で一周できる、デリバリー連合の試運転。
+          「あの店、行きたかったんよね」を全部ここで。
+        </p>
+        <div class="ev-tags">
+          <span>近隣店舗</span><span>デリバリー</span><span>食べ歩き</span>
+        </div>
+      </div>
+
+      <div class="ev-card">
+        <div class="ev-num">02 ／ RADIO</div>
+        <div class="ev-glyph">音<span class="sub">RADIO</span></div>
+        <h3 class="ev-title">「寳家のらじお」公開収録</h3>
+        <p class="ev-desc">
+          常連さんをゲストに、その場でライブ配信。自分が出演する体験が、
+          いちばん強い口コミになる。録画はYouTubeに残ります。
+        </p>
+        <div class="ev-tags">
+          <span>ライブ配信</span><span>ゲスト出演</span><span>YouTube</span>
+        </div>
+      </div>
+
+      <div class="ev-card">
+        <div class="ev-num">03 ／ GALLERY</div>
+        <div class="ev-glyph">画<span class="sub">GALLERY</span></div>
+        <h3 class="ev-title">壁ギャラリーお披露目</h3>
+        <p class="ev-desc">
+          地域の絵・写真を寳家の壁に一斉展示。来るたびに変わる、
+          「ここに来れば何かある」がビジュアルで伝わる仕掛け。
+        </p>
+        <div class="ev-tags">
+          <span>展示</span><span>地域作品</span><span>子ども歓迎</span>
+        </div>
+      </div>
+
+      <div class="ev-card">
+        <div class="ev-num">04 ／ HEALTH</div>
+        <div class="ev-glyph">湯<span class="sub">DETOX</span></div>
+        <h3 class="ev-title">足湯デトックス体験</h3>
+        <p class="ev-desc">
+          食べながら、足湯で体を整える。
+          縁日のなかに、ふっとリラックスを差し込む寳家らしい一枠。
+        </p>
+        <div class="ev-tags">
+          <span>足湯</span><span>500〜1,000円<span class="todo">要確認</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="event-flow reveal">
+      <div class="heading">当日の流れ</div>
+      <div class="text">
+        食べる → しゃべる → <b>らじおに出る</b> → 足湯で整う → <b>LINE登録</b>。
+        最後の登録コーナーで「家族認定証」（紙）をその場で渡します。
+        8月本番の先行案内が届きます。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     EVENT — 8月 お盆まつり
+     =================================================================== -->
+<section class="event event--august" id="august">
+  <div class="container">
+    <div class="section-head reveal" style="color: rgba(241,234,217,.75);">
+      <span class="num" style="color: var(--chochin);">03 ／ STEP 2</span><span>AUGUST ／ お盆まつり</span>
+    </div>
+
+    <div class="event-head reveal">
+      <div class="event-step"><span class="num">02</span>.</div>
+      <div class="event-titles">
+        <div class="event-month">8月 ／ 本番</div>
+        <h2 class="event-title">
+          寳家お盆まつり<br/>
+          <span style="color:var(--washi-3); font-size:.6em; letter-spacing:.05em;">〜まちの家族、集まれ〜</span>
+        </h2>
+        <p class="event-subtitle">
+          松浦花火大会 当日、寳家が <b style="color:var(--chochin); font-weight:600;">まちの本部</b> になる夜。
+          帰省中の人、子連れの家族、近所の人。みんなで、ひとつの晩へ。
+        </p>
+      </div>
+      <div class="event-tate">花火の夜、まちの本部にて</div>
+    </div>
+
+    <div class="event-facts reveal-stagger">
+      <div class="fact">
+        <div class="label">DATE</div>
+        <div class="val">松浦花火大会 当日<small><span class="todo">日程要確認</span></small></div>
+      </div>
+      <div class="fact">
+        <div class="label">TIME</div>
+        <div class="val">昼〜花火終了後</div>
+      </div>
+      <div class="fact">
+        <div class="label">TARGET</div>
+        <div class="val"><span class="em">100</span>人以上</div>
+      </div>
+      <div class="fact">
+        <div class="label">PARTICIPATION</div>
+        <div class="val">どなたでも</div>
+      </div>
+    </div>
+
+    <div class="event-cards reveal-stagger">
+      <div class="ev-card">
+        <div class="ev-num">01 ／ FOOD FES</div>
+        <div class="ev-glyph">膳<span class="sub">FOODFES</span></div>
+        <h3 class="ev-title">まちの食卓フードフェス</h3>
+        <p class="ev-desc">
+          近隣店舗が一堂に集結。「寳家に来れば松浦の味が全部ある」を体現する一日。
+          帰省客が「地元の店を再発見する」夜に。
+        </p>
+        <div class="ev-tags">
+          <span>近隣連合</span><span>フードフェス</span><span>松浦の味</span>
+        </div>
+      </div>
+
+      <div class="ev-card">
+        <div class="ev-num">02 ／ LIVE</div>
+        <div class="ev-glyph">火<span class="sub">FIREWORKS</span></div>
+        <h3 class="ev-title">花火ライブ配信 from 寳家</h3>
+        <p class="ev-desc">
+          松浦花火大会を寳家から YouTube・X で中継。
+          ここから見る花火そのものが、遠方の親族にも届くコンテンツになります。
+        </p>
+        <div class="ev-tags">
+          <span>YouTube</span><span>X (Twitter)</span><span>ライブ中継</span>
+        </div>
+      </div>
+
+      <div class="ev-card">
+        <div class="ev-num">03 ／ STAGE</div>
+        <div class="ev-glyph">声<span class="sub">STAGE</span></div>
+        <h3 class="ev-title">寳家ステージ ／ 聴いて、唄って。</h3>
+        <p class="ev-desc">
+          帰省中の人や町のご隠居にマイクを向ける「松浦の人に聴く」公開インタビュー、
+          続いてステージライブ。飛び入りトーク・歌・楽器ぜんぶOK。
+          同時にYouTube・Xでライブ配信＆アーカイブ化。
+        </p>
+        <div class="ev-tags">
+          <span>公開インタビュー</span><span>ステージライブ</span><span>飛び入りOK</span>
+        </div>
+      </div>
+
+      <div class="ev-card">
+        <div class="ev-num">04 ／ KIDS</div>
+        <div class="ev-glyph">童<span class="sub">KIDS</span></div>
+        <h3 class="ev-title">子どもの居場所コーナー</h3>
+        <p class="ev-desc">
+          工作・ゲーム・放送局スタッフ体験。
+          子どもが楽しめる場所には、家族で来てもらえる。子どもが司会をやる回も。
+        </p>
+        <div class="ev-tags">
+          <span>工作</span><span>ゲーム</span><span>放送局体験</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="aug-extra reveal">
+      <div class="icon">湯</div>
+      <div class="body">
+        <b>健康・デトックス（7月から拡張）</b><br/>
+        足湯に加えて、ヨガ・薬膳・ジェノグラムカウンセリングなどを検討中。
+        「松浦で体をリセットした」帰省体験を、寳家から届けます。
+      </div>
+      <div class="note">拡張内容<span class="todo" style="margin-left:6px;">要確認</span></div>
+    </div>
+
+    <div class="event-flow reveal">
+      <div class="heading">合言葉</div>
+      <div class="text">
+        寳家から ＞「<b>おかえり、松浦。</b>」<br/>
+        あなたから ＞「<b>ただいま、松浦。</b>」<br/>
+        7月に来た人は、ぜひ1人連れてきてください。それが、松浦のまちへの、いちばんの恩返し。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     HOW — 3 step
+     =================================================================== -->
+<section class="how" id="how">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="num">07</span><span>HOW ／ 参加のかたち</span>
+    </div>
+
+    <h2 class="section-title reveal">
+      参加に、<span class="accent">難しいこと</span>はひとつもありません。
+    </h2>
+    <div class="section-subtitle reveal">THREE STEPS — DROP IN, JOIN THE FAMILY, BRING SOMEONE</div>
+
+    <div class="how-grid reveal-stagger">
+      <div class="step-card">
+        <div class="step-num">壱</div>
+        <h3>ふらっと、来る。</h3>
+        <p>
+          予約も手土産もいりません。
+          開いている時間に、ふらっと暖簾をくぐってください。
+          スタッフが「おかえり」と声をかけます。
+        </p>
+        <div class="arrow">↓</div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">弐</div>
+        <h3>LINE に、登録する。</h3>
+        <p>
+          会場の QR から「寳家公式LINE」に登録。
+          紙の「家族認定証」をその場でお渡しします。
+          ポイントじゃなく、家族として認定される感覚。
+        </p>
+        <div class="arrow">↓</div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">参</div>
+        <h3>次は、1人連れてくる。</h3>
+        <p>
+          いちばん大事なのはこれ。
+          「久しぶりに会いたい人」「最近見かけない人」を、
+          次の夜に連れてきてください。それが、寳家のひろがり方。
+        </p>
+        <div class="arrow">→</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     WHO — 来てほしい人
+     =================================================================== -->
+<section class="who">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="num">08</span><span>WHO ／ こんな人に、来てほしい</span>
+    </div>
+
+    <h2 class="section-title reveal">
+      <span class="accent">名前のない夜</span>を、<br/>
+      過ごしたい人へ。
+    </h2>
+    <div class="section-subtitle reveal">FOR EVERYONE WHO STILL HAS SOMEONE TO MEET</div>
+
+    <div class="who-grid">
+      <ul class="who-list reveal-stagger">
+        <li>
+          <div class="tag">7月 ／ 縁日</div>
+          <div class="body">
+            寳家の常連さん／近所の人
+            <small>いつものメンバーで、新しい夜を。</small>
+          </div>
+        </li>
+        <li>
+          <div class="tag">7月 ／ 縁日</div>
+          <div class="body">
+            「久しぶりに会う人」を連れてきたい人
+            <small>会いたかった顔ぶれを、寳家に集めましょう。</small>
+          </div>
+        </li>
+        <li>
+          <div class="tag">8月 ／ 本番</div>
+          <div class="body">
+            帰省している人／久しぶりに松浦に戻ってきた人
+            <small>「おかえり」を、玄関で受けとってください。</small>
+          </div>
+        </li>
+        <li>
+          <div class="tag">8月 ／ 本番</div>
+          <div class="body">
+            子ども連れ／家族で楽しめる場所を探している人
+            <small>子どもが楽しめる場所には、家族の物語が生まれる。</small>
+          </div>
+        </li>
+        <li>
+          <div class="tag">通年</div>
+          <div class="body">
+            「地元の店を再発見したい」人
+            <small>近所のごはんが、一晩で一周できる夜があります。</small>
+          </div>
+        </li>
+      </ul>
+
+      <div class="who-quote reveal">
+        <p class="text">
+          商売じゃなく、場所づくり。<br/>
+          近所の人にも、帰省中の人にも、はじめましての人にも、<br/>
+          「<span style="color:var(--chochin);">おかえり</span>」と、いつでも言える家でありたい。<br/><br/>
+          ——それが、寳家がひらいている理由のぜんぶです。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     NEXT — これから（寳家 × みんなの学校）
+     =================================================================== -->
+<section class="next" id="next">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="num">06</span><span>NEXT — この夏は、はじまり</span>
+    </div>
+
+    <h2 class="section-title reveal">
+      この夏は、<span class="accent">はじまり</span>です。
+    </h2>
+    <div class="section-subtitle reveal">A SUMMER THAT KEEPS GOING — THE TWO HOUSES OF MATSUURA</div>
+
+    <p class="next-lead reveal">
+      松浦に、まちのみんなが集う「家」を、もっと増やしていきたい——そう思っています。
+      いま動いているのは、<b>寳家</b>。
+      そして、いつかは <b>もうひとつ</b>。<br/>
+      三世代がおなじ屋根の下で家族のように交わる場所を、まちのどこかに、
+      <b>ふたつめ、みっつめ</b>と、ゆっくり増やしていく。<br/>
+      そして、いつかは——<b>寳家のような場所が、全国に、ぽつぽつと生まれていく</b>。
+    </p>
+
+    <div class="next-two reveal-stagger">
+      <div class="next-card">
+        <div class="label">HOUSE 01 ／ NOW OPEN</div>
+        <div class="glyph">家</div>
+        <h3>寳家<br/><span style="font-size:.55em; color: var(--washi-3); letter-spacing:.05em;">築100年の元旅館</span></h3>
+        <p>
+          松浦の "玄関" としていま動いている家。
+          勉強・工房・イベント・食卓。アイデア次第でなんでも使える、まちの本部スタジオ。
+        </p>
+        <div class="tag"><b>＞</b> 2026年、活動中</div>
+      </div>
+
+      <div class="next-amp">＋</div>
+
+      <div class="next-card">
+        <div class="label">HOUSE 02 ／ SOMEDAY</div>
+        <div class="glyph">次</div>
+        <h3>そして、もうひとつ<br/><span style="font-size:.55em; color: var(--washi-3); letter-spacing:.05em;">いつか、まちのどこかに</span></h3>
+        <p>
+          寳家のあとに、もうひとつ。
+          三世代がおなじ屋根の下で家族のように過ごせる場所を、
+          松浦のなかにゆっくり増やしていきたい——そんな夢を、まず温めています。
+        </p>
+        <div class="tag"><b>＞</b> ゆくゆくの展開</div>
+      </div>
+    </div>
+
+    <p class="next-bottom reveal">
+      7月の縁日、8月のお盆まつり——<br/>
+      それは <span class="em">一晩で終わる祭りじゃありません</span>。
+      松浦に「集まる家」が少しずつ増えていく、その<b style="color:var(--chochin);">いちばん最初の二夜</b>です。
+    </p>
+
+    <div class="next-three reveal-stagger">
+      <div class="gen">
+        <div class="age">三世代 ／ 01</div>
+        <h4>子ども</h4>
+        <p>勉強する、工作する、放送局に出る、ゲームで遊ぶ。「ここに来れば何かある」を体ごとおぼえる世代。</p>
+      </div>
+      <div class="gen">
+        <div class="age">三世代 ／ 02</div>
+        <h4>お父さん、お母さん</h4>
+        <p>子どもを見守りつつ、近所の人と話せる夜。日々の役割から、ふっと家族の食卓へ。</p>
+      </div>
+      <div class="gen">
+        <div class="age">三世代 ／ 03</div>
+        <h4>おじいちゃん、おばあちゃん</h4>
+        <p>町の物語を、いちばん持っている世代。マイクを向ければ、ぜんぶが寳家のアーカイブになる。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     CTA
+     =================================================================== -->
+<section class="cta" id="cta">
+  <div class="container">
+    <div class="cta-eyebrow reveal">TO THE FIRST NIGHT</div>
+
+    <h2 class="cta-title reveal">
+      まずは <span class="em">7月</span>、<br/>
+      縁日に、おかえり。
+    </h2>
+
+    <p class="cta-sub reveal">
+      日程が決まったら、LINEで真っ先に案内します。
+      登録した人には、紙の「家族認定証」と、8月本番の先行案内が届きます。
+    </p>
+
+    <div class="cta-actions reveal">
+      <a href="#" class="btn primary">
+        <svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 2C6.48 2 2 5.94 2 10.78c0 4.35 3.55 7.99 8.34 8.68.32.07.76.21.87.49.1.25.07.64.03.9l-.14.85c-.04.25-.2.99.87.54 1.07-.45 5.77-3.4 7.87-5.82C21.43 15.04 22 13.04 22 10.78 22 5.94 17.52 2 12 2z"/>
+        </svg>
+        寳家公式LINEに登録
+        <span class="arrow">→</span>
+      </a>
+      <a href="#july" class="btn ghost">
+        7月の内容をもう一度みる
+        <span class="arrow">↑</span>
+      </a>
+    </div>
+
+    <div class="cta-note">
+      <span class="marker">※</span>
+      LINEリンク・正式な参加方法は<span class="todo">要確認</span>。日程確定後、このページに反映します。
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     ACCESS
+     =================================================================== -->
+<section class="access-strip" id="access">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="num">09</span><span>ACCESS ／ 寳家のばしょ</span>
+    </div>
+
+    <div class="access-grid">
+      <div class="reveal">
+        <dl>
+          <dt>ADDRESS</dt>
+          <dd>
+            <span class="em">長崎県松浦市1188番地</span>
+            （志佐町／松浦駅から徒歩圏内）<span class="todo">徒歩分要確認</span>
+          </dd>
+
+          <dt>CONTACT</dt>
+          <dd>
+            <span class="em">寳家公式LINE</span>
+            上の登録ボタンから、または会場の QR で。
+          </dd>
+
+          <dt>PARKING</dt>
+          <dd>
+            お近くの方は徒歩・自転車で。
+            車の方は花火大会当日の交通規制にご注意ください。<span class="todo">案内要確認</span>
+          </dd>
+        </dl>
+      </div>
+
+      <div class="access-story reveal">
+        <span class="label">ABOUT THIS LAND</span>
+        松浦は、玄界灘に面した、古い港町。<br/>
+        誰かを迎え、誰かを送り出して、その繰り返しでまわってきた町です。<br/><br/>
+        遠くを見つめてきたこの町に、いま、もう一度、ふたたび集まる夜を。
+        寳家の二夜は、その小さな一歩です。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     FOOTER
+     =================================================================== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="name"><span class="yes">YES!</span>寳家</div>
+      <div class="tag">おかえり、松浦。<span style="display:block; font-size:13px; color:var(--washi-3); margin-top:4px; font-style:italic;">— ここに来れば、何かある。</span></div>
+      <p>
+        長崎県松浦市・築100年の元旅館で、
+        誰もが気軽に集えるコミュニティスペース。
+      </p>
+    </div>
+
+    <div class="footer-col">
+      <h5>SUMMER 2026</h5>
+      <ul>
+        <li><a href="#july">7月 ／ 寳家の縁日</a></li>
+        <li><a href="#august">8月 ／ お盆まつり</a></li>
+        <li><a href="#next">これから ／ もうひとつへ</a></li>
+        <li><a href="#how">参加のかたち</a></li>
+        <li><a href="#cta">LINE登録</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h5>CONNECT</h5>
+      <ul>
+        <li><a href="#">Instagram <span class="todo">URL要確認</span></a></li>
+        <li><a href="#">YouTube 寳家のらじお</a></li>
+        <li><a href="#">X (Twitter)</a></li>
+        <li><a href="#">寳家公式LINE</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-credit">
+    <div>YES!寳家</div>
+    <div>© 2026</div>
+  </div>
+</footer>
+
+<!-- ===================================================================
+     SCRIPTS — 花火 Canvas + IntersectionObserver
+     =================================================================== -->
+<script>
+(() => {
+  'use strict';
+
+  /* =================================================================
+     1) IntersectionObserver — scroll fade-in
+     ================================================================= */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        en.target.classList.add('is-in');
+        io.unobserve(en.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => io.observe(el));
+
+  /* =================================================================
+     2) Hanabi (花火) — Canvas particle animation
+     ================================================================= */
+  const canvas = document.getElementById('hanabi');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  let W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+  let prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function resize() {
+    const hero = canvas.parentElement;
+    W = hero.clientWidth;
+    H = hero.clientHeight;
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // particle palettes — chochin orange + gold + occasional cool
+  const palettes = [
+    ['#ff9e5e', '#e8864a', '#c66a32', '#ffd9a8'],   // chochin
+    ['#e0b35a', '#c9963a', '#a17a20', '#f4d98e'],   // gold
+    ['#ffb070', '#ffe2c0', '#e8864a', '#7a3e1a'],   // warm sand
+    ['#ffd5a0', '#ffac6a', '#c9963a', '#e8864a'],   // mix
+  ];
+
+  // 1 burst = 1 firework
+  const bursts = [];
+  // small ambient embers floating up
+  const embers = [];
+
+  function rand(a, b) { return a + Math.random() * (b - a); }
+  function pick(arr) { return arr[(Math.random() * arr.length) | 0]; }
+
+  class Particle {
+    constructor(x, y, vx, vy, color, life) {
+      this.x = x; this.y = y; this.vx = vx; this.vy = vy;
+      this.color = color;
+      this.life = life;
+      this.maxLife = life;
+      this.size = rand(1.2, 2.6);
+      // small "trail" tracking
+      this.px = x; this.py = y;
+    }
+    step(dt) {
+      this.px = this.x; this.py = this.y;
+      this.x += this.vx * dt;
+      this.y += this.vy * dt;
+      // gravity + air drag
+      this.vy += 28 * dt;
+      this.vx *= Math.pow(0.96, dt * 60);
+      this.vy *= Math.pow(0.965, dt * 60);
+      this.life -= dt;
+    }
+    draw(ctx) {
+      const t = Math.max(0, this.life / this.maxLife);
+      const alpha = t * t;
+      // streak
+      ctx.strokeStyle = this.color;
+      ctx.globalAlpha = alpha * 0.85;
+      ctx.lineWidth = this.size;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(this.px, this.py);
+      ctx.lineTo(this.x, this.y);
+      ctx.stroke();
+      // head
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = this.color;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size * 0.9, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  function spawnBurst(x, y) {
+    const palette = pick(palettes);
+    const count = (Math.random() < 0.3 ? 110 : 70) | 0;
+    const baseSpeed = rand(110, 180);
+    const ring = Math.random() < 0.4; // ring vs random
+    const ps = [];
+    for (let i = 0; i < count; i++) {
+      const ang = ring
+        ? (i / count) * Math.PI * 2 + rand(-0.05, 0.05)
+        : rand(0, Math.PI * 2);
+      const sp = ring ? baseSpeed * rand(0.85, 1.1) : baseSpeed * rand(0.3, 1.15);
+      const vx = Math.cos(ang) * sp;
+      const vy = Math.sin(ang) * sp - rand(0, 20);
+      ps.push(new Particle(x, y, vx, vy, pick(palette), rand(1.2, 2.4)));
+    }
+    bursts.push({ particles: ps, glow: { x, y, r: 60, life: 0.3, color: pick(palette) }});
+  }
+
+  function spawnEmber() {
+    embers.push({
+      x: rand(0, W),
+      y: H + 10,
+      vx: rand(-8, 8),
+      vy: -rand(20, 50),
+      life: rand(3.5, 6),
+      maxLife: 6,
+      size: rand(0.8, 1.6),
+      color: Math.random() < 0.6 ? '#e8864a' : '#c9963a',
+    });
+  }
+
+  let last = performance.now();
+  let burstTimer = 0;
+  let emberTimer = 0;
+
+  function frame(now) {
+    const dt = Math.min((now - last) / 1000, 0.05);
+    last = now;
+
+    // fade overlay (motion blur)
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = 'rgba(13,10,4,0.18)';
+    ctx.fillRect(0, 0, W, H);
+
+    if (!prefersReducedMotion) {
+      // burst spawn
+      burstTimer -= dt;
+      if (burstTimer <= 0) {
+        const x = rand(W * 0.15, W * 0.85);
+        const y = rand(H * 0.15, H * 0.45);
+        spawnBurst(x, y);
+        burstTimer = rand(1.6, 3.4);
+      }
+
+      // ember spawn
+      emberTimer -= dt;
+      if (emberTimer <= 0) {
+        spawnEmber();
+        emberTimer = rand(0.2, 0.6);
+      }
+    }
+
+    ctx.globalCompositeOperation = 'lighter';
+
+    // bursts
+    for (let i = bursts.length - 1; i >= 0; i--) {
+      const b = bursts[i];
+      // glow ring fade
+      if (b.glow.life > 0) {
+        b.glow.life -= dt;
+        const g = ctx.createRadialGradient(b.glow.x, b.glow.y, 0, b.glow.x, b.glow.y, b.glow.r * (1 - b.glow.life/0.3 + 0.4));
+        g.addColorStop(0, b.glow.color);
+        g.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = g;
+        ctx.globalAlpha = Math.max(0, b.glow.life / 0.3) * 0.7;
+        ctx.beginPath();
+        ctx.arc(b.glow.x, b.glow.y, b.glow.r * 1.4, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      let alive = false;
+      for (const p of b.particles) {
+        if (p.life <= 0) continue;
+        p.step(dt);
+        p.draw(ctx);
+        alive = true;
+      }
+      if (!alive) bursts.splice(i, 1);
+    }
+
+    // embers
+    for (let i = embers.length - 1; i >= 0; i--) {
+      const e = embers[i];
+      e.x += e.vx * dt;
+      e.y += e.vy * dt;
+      e.vy += -2 * dt; // float up gently
+      e.life -= dt;
+      if (e.life <= 0 || e.y < -10) {
+        embers.splice(i, 1);
+        continue;
+      }
+      const t = Math.max(0, e.life / e.maxLife);
+      ctx.globalAlpha = t * 0.75;
+      ctx.fillStyle = e.color;
+      ctx.beginPath();
+      ctx.arc(e.x, e.y, e.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame((t) => { last = t; frame(t); });
+
+  // user-triggered fireworks on hero click — playful little bonus
+  canvas.parentElement.addEventListener('click', (ev) => {
+    if (prefersReducedMotion) return;
+    if (ev.target.closest('a, button, .badge')) return;
+    const rect = canvas.getBoundingClientRect();
+    spawnBurst(ev.clientX - rect.left, ev.clientY - rect.top);
+  });
+
+  /* =================================================================
+     3) Smooth-anchor offset (compensate for fixed nav)
+     ================================================================= */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href');
+      if (!id || id === '#') return;
+      const target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      const offset = 72;
+      const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+
+})();
+</script>
+
+</body>
+</html>
