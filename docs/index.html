@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>看板職人くん — URLを貼るだけで、そのブランドのLPが生まれる</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fafaf7;
+  --bg-alt:#f1ede4;
+  --ink:#1a1a1a;
+  --ink-sub:#555;
+  --accent:#2b5d4b;
+  --accent-light:#3d7a64;
+  --line:#e3ddd0;
+  --card:#ffffff;
+  --gold:#b8945f;
+  --font-ja:'Noto Serif JP', serif;
+  --font-en:'Inter', sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-ja);background:var(--bg);color:var(--ink);line-height:1.8;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;transition:.3s;display:flex;justify-content:space-between;align-items:center}
+.nav.scrolled{background:rgba(250,250,247,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav-logo{font-family:var(--font-en);font-weight:700;font-size:1.1rem;letter-spacing:.02em}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2rem;font-size:.9rem}
+.nav-links a{color:var(--ink-sub);transition:.2s}
+.nav-links a:hover{color:var(--accent)}
+@media(max-width:720px){.nav-links{display:none}}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:8rem 1.5rem 4rem;position:relative;overflow:hidden;background:linear-gradient(180deg,#fafaf7 0%,#f1ede4 100%)}
+.hero::before{content:"";position:absolute;top:10%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(43,93,75,.08),transparent 70%);border-radius:50%}
+.hero-inner{max-width:960px;text-align:center;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.2rem;border:1px solid var(--line);background:rgba(255,255,255,.6);border-radius:100px;font-size:.85rem;color:var(--ink-sub);margin-bottom:2rem;font-family:var(--font-en);font-weight:500}
+.hero-badge::before{content:"";width:8px;height:8px;background:var(--accent);border-radius:50%}
+.hero h1{font-size:clamp(2rem,5.5vw,4.2rem);font-weight:700;line-height:1.3;letter-spacing:-.01em;margin-bottom:1.5rem}
+.hero h1 em{font-style:normal;color:var(--accent);position:relative}
+.hero h1 em::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:6px;background:rgba(184,148,95,.3);z-index:-1}
+.hero-sub{font-size:clamp(1rem,1.6vw,1.2rem);color:var(--ink-sub);margin-bottom:3rem;line-height:1.9}
+.hero-cta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3.5rem}
+.btn{display:inline-flex;align-items:center;gap:.6rem;padding:1rem 2rem;border-radius:8px;font-weight:600;font-size:1rem;transition:.25s;cursor:pointer;border:none;font-family:inherit}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 4px 14px rgba(43,93,75,.25)}
+.btn-primary:hover{background:var(--accent-light);transform:translateY(-2px);box-shadow:0 8px 20px rgba(43,93,75,.35)}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.hero-strengths{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;padding-top:2.5rem;border-top:1px solid var(--line)}
+.strength{display:flex;align-items:center;gap:.6rem;font-size:.95rem;color:var(--ink-sub)}
+.strength-icon{width:32px;height:32px;background:rgba(43,93,75,.1);color:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-family:var(--font-en);font-size:.85rem}
+
+/* SECTION COMMON */
+section{padding:7rem 1.5rem}
+.container{max-width:1100px;margin:0 auto}
+.section-label{display:block;font-family:var(--font-en);font-size:.85rem;letter-spacing:.2em;color:var(--accent);text-transform:uppercase;text-align:center;margin-bottom:1rem;font-weight:600}
+.section-title{font-size:clamp(1.8rem,3.8vw,2.8rem);font-weight:700;text-align:center;line-height:1.4;margin-bottom:1rem}
+.section-desc{text-align:center;color:var(--ink-sub);font-size:1rem;margin-bottom:4rem;max-width:600px;margin-left:auto;margin-right:auto}
+
+/* PAIN */
+.pain{background:var(--bg-alt)}
+.pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
+.pain-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:2rem;transition:.3s}
+.pain-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.06)}
+.bubble{background:#fff5ee;border-left:3px solid #d97757;padding:1rem 1.2rem;border-radius:8px;font-size:.95rem;color:#7a3f2a;margin-bottom:1rem}
+.bubble-solution{background:rgba(43,93,75,.06);border-left:3px solid var(--accent);padding:1rem 1.2rem;border-radius:8px;font-size:.95rem;color:var(--accent)}
+.bubble-label{display:block;font-size:.75rem;font-weight:700;margin-bottom:.3rem;letter-spacing:.05em}
+
+/* FEATURES */
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.feature-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:2.2rem;transition:.3s}
+.feature-card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.06)}
+.feature-icon{width:56px;height:56px;background:rgba(43,93,75,.08);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin-bottom:1.3rem}
+.feature-card h3{font-size:1.15rem;font-weight:700;margin-bottom:.7rem;line-height:1.5}
+.feature-card p{font-size:.92rem;color:var(--ink-sub);line-height:1.8}
+
+/* STEPS */
+.steps{background:var(--bg-alt)}
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;margin-top:3rem}
+.step{text-align:center;padding:1rem}
+.step-num{font-family:var(--font-en);font-size:clamp(3rem,5vw,4rem);font-weight:700;color:var(--accent);line-height:1;margin-bottom:1rem;opacity:.9}
+.step h3{font-size:1.2rem;font-weight:700;margin-bottom:.7rem}
+.step p{color:var(--ink-sub);font-size:.95rem}
+
+/* COMING */
+.coming-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.coming-card{background:var(--card);border:1px dashed var(--line);border-radius:16px;padding:2rem;position:relative}
+.coming-badge{display:inline-block;background:var(--gold);color:#fff;font-size:.7rem;padding:.3rem .8rem;border-radius:100px;font-weight:600;letter-spacing:.05em;margin-bottom:1rem;font-family:var(--font-en)}
+.coming-card h3{font-size:1.1rem;font-weight:700;margin-bottom:.6rem}
+.coming-card p{font-size:.9rem;color:var(--ink-sub)}
+
+/* CTA */
+.cta{background:var(--accent);color:#fff;text-align:center;padding:7rem 1.5rem}
+.cta h2{font-size:clamp(1.8rem,4vw,3rem);font-weight:700;line-height:1.4;margin-bottom:1rem}
+.cta p{font-size:1.05rem;opacity:.85;margin-bottom:2.5rem}
+.cta .btn-primary{background:#fff;color:var(--accent)}
+.cta .btn-primary:hover{background:#f1ede4}
+.cta .btn-ghost{color:#fff;border-color:rgba(255,255,255,.3)}
+.cta .btn-ghost:hover{border-color:#fff;color:#fff}
+.micro{margin-top:1.8rem;font-size:.85rem;opacity:.7;display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap}
+
+/* FOOTER */
+footer{background:#1a1a1a;color:#aaa;text-align:center;padding:3rem 1.5rem;font-size:.85rem}
+footer .brand{font-family:var(--font-en);font-weight:700;color:#fff;margin-bottom:.5rem;font-size:1rem}
+
+/* FADE */
+.fade{opacity:0;transform:translateY(20px);transition:opacity .8s,transform .8s}
+.fade.visible{opacity:1;transform:translateY(0)}
+</style>
+<style>
+@keyframes _kfShow{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:none}}
+.fade-in:not(.visible){animation:_kfShow .3s ease .05s both}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="#hero" class="nav-logo">🪧 看板職人<span>くん</span></a>
+  <div class="nav-links">
+    <a href="#pain">お悩み</a>
+    <a href="#features">機能</a>
+    <a href="#how">使い方</a>
+    <a href="#cta">試す</a>
+  </div>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">URL → LP 自動生成ツール</div>
+    <h1>URLを貼るだけで、<br>そのブランドの<em>LPが生まれる</em>。</h1>
+    <p class="hero-sub">テンプレートではなく、対象サイトの色・フォント・文章を実際に読み取る。<br>毎回違う、そのブランドだけのランディングページ。</p>
+    <div class="hero-cta">
+      <a href="#cta" class="btn btn-primary">URLを貼って試す →</a>
+      <a href="https://github.com/YouseiRock/005_lp_generator" target="_blank" rel="noopener" class="btn btn-ghost">GitHubで見る ↗</a>
+    </div>
+    <div class="hero-strengths">
+      <div class="strength"><span class="strength-icon">01</span>ブランドの色を自動抽出</div>
+      <div class="strength"><span class="strength-icon">02</span>文章をゼロから考えない</div>
+      <div class="strength"><span class="strength-icon">03</span>ボタン1つで公開できる</div>
+    </div>
+  </div>
+</section>
+
+<section class="pain fade" id="pain">
+  <div class="container">
+    <span class="section-label">Pain Points</span>
+    <h2 class="section-title">LP作りの「あるある」、<br>全部解決します</h2>
+    <p class="section-desc">デザインも文章も、ゼロから作るのはもう終わり。</p>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="bubble"><span class="bubble-label">😩 こんな悩み</span>LP作りに丸1日かかる…デザインを考えるだけで疲れる。</div>
+        <div class="bubble-solution"><span class="bubble-label">✅ これで解決</span>URLを貼るだけで、AIがそのまま生成してくれる。</div>
+      </div>
+      <div class="pain-card">
+        <div class="bubble"><span class="bubble-label">😩 こんな悩み</span>テンプレートはどれも似たり寄ったり…ブランドらしさが出ない。</div>
+        <div class="bubble-solution"><span class="bubble-label">✅ これで解決</span>色・フォント・文章を読み取って、そのブランドだけのLPを作る。</div>
+      </div>
+      <div class="pain-card">
+        <div class="bubble"><span class="bubble-label">😩 こんな悩み</span>作ったLPを公開するのが面倒…サーバー設定が難しい。</div>
+        <div class="bubble-solution"><span class="bubble-label">✅ これで解決</span>GitHub Pages公開機能で、ボタンを押すだけで公開できる。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features fade" id="features">
+  <div class="container">
+    <span class="section-label">Features</span>
+    <h2 class="section-title">あなたのLP作りを、<br>まるごと助ける</h2>
+    <p class="section-desc">機能ではなく、あなたが得られる変化を紹介します。</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎨</div>
+        <h3>そのブランドの色がそのまま出る</h3>
+        <p>対象サイトを読み取って、カラーパレットを自動で抽出。ブランドの世界観をそのまま再現する。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✍️</div>
+        <h3>文章をゼロから考えなくていい</h3>
+        <p>サイトのテキストを読み取り、AIがLP向けの文章に書き直す。コピーライターいらず。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🚀</div>
+        <h3>ボタン1つでそのまま公開</h3>
+        <p>GitHub Pagesへワンクリック公開。サーバー設定もアップロードもいらない。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎬</div>
+        <h3>YouTube動画にも対応</h3>
+        <p>YouTubeのURLを貼れば、字幕を読み取って動画紹介ページを作る。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔗</div>
+        <h3>複数URL・画像・PDFもOK</h3>
+        <p>1つのサイトだけでなく、複数のURLや画像、PDF、Google Mapsからも情報を集められる。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📝</div>
+        <h3>Notionに記録が残る</h3>
+        <p>生成したLPの情報をNotionに自動で保存。あとから見返すのもかんたん。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="steps fade" id="how">
+  <div class="container">
+    <span class="section-label">How it works</span>
+    <h2 class="section-title">3ステップで完成</h2>
+    <p class="section-desc">難しい操作は一切なし。</p>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>URLを貼る</h3>
+        <p>対象サイトのURLを入力欄に貼り付ける。それだけ。</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>AIが読み取って作る</h3>
+        <p>色・フォント・文章を自動で抽出して、LPを組み立てる。</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>ボタンで公開</h3>
+        <p>GitHub Pagesへワンクリックで公開。すぐにURLが手に入る。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features fade" id="coming">
+  <div class="container">
+    <span class="section-label">Coming next</span>
+    <h2 class="section-title">看板職人くんは、まだ進化する</h2>
+    <p class="section-desc">これから追加される予定の機能です。</p>
+    <div class="coming-grid">
+      <div class="coming-card">
+        <span class="coming-badge">COMING</span>
+        <h3>A/Bテスト生成</h3>
+        <p>1つのURLから複数パターンのLPを同時に作り、効果を比べられる。</p>
+      </div>
+      <div class="coming-card">
+        <span class="coming-badge">COMING</span>
+        <h3>独自ドメイン対応</h3>
+        <p>GitHub Pages以外にも、自分のドメインで公開できるように。</p>
+      </div>
+      <div class="coming-card">
+        <span class="coming-badge">COMING</span>
+        <h3>セクション編集UI</h3>
+        <p>生成後にブラウザ上で各セクションを直接編集できる機能。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta fade" id="cta">
+  <h2>URLを貼るだけで、<br>あなたのLPが完成する。</h2>
+  <p>外注も、デザインの悩みも、もう終わり。</p>
+  <div class="hero-cta">
+    <a href="https://yousayrock.github.io/-005-lp-generator/" target="_blank" rel="noopener" class="btn btn-primary">看板職人くんを試す →</a>
+    <a href="https://github.com/YouseiRock/005_lp_generator" target="_blank" rel="noopener" class="btn btn-ghost">GitHubで見る ↗</a>
+  </div>
+  <div class="micro">
+    <span>✓ ブラウザだけで動く</span>
+    <span>✓ インストール不要</span>
+    <span>✓ オープンソース</span>
+  </div>
+</section>
+
+<footer>
+  <div class="brand">🪧 看板職人くん</div>
+  <div>© <span id="yr"></span> 看板職人くん. All rights reserved.</div>
+  <script>document.getElementById('yr').textContent=new Date().getFullYear()</script>
+</footer>
+
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>20)});
+const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('visible')),{threshold:.15});
+document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+</script>
+<noscript><style>.fade-in{opacity:1!important;transform:none!important}</style></noscript>
+<script>
+(function(){
+  function run(){
+    var H=window.innerHeight;
+    var io=window.IntersectionObserver?new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
+    },{threshold:.05,rootMargin:'100px'}):null;
+    document.querySelectorAll('.fade-in').forEach(function(el){
+      el.getBoundingClientRect().top<H+100?el.classList.add('visible'):io&&io.observe(el);
+    });
+    setTimeout(function(){
+      document.querySelectorAll('.fade-in:not(.visible)').forEach(function(e){e.classList.add('visible');});
+    },400);
+  }
+  document.readyState==='loading'?document.addEventListener('DOMContentLoaded',run):run();
+})();
+</script>
+</body>
+</html>
